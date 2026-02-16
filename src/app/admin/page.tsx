@@ -17,7 +17,7 @@ export default async function AdminPage() {
 
     if (error) {
         return (
-            <div className="min-h-screen flex items-center justify-center text-red-500">
+            <div className="min-h-screen flex items-center justify-center text-red-400 font-cairo">
                 Error loading bookings: {error.message}
             </div>
         );
@@ -26,10 +26,10 @@ export default async function AdminPage() {
     return (
         <div className="min-h-screen bg-background p-8 font-cairo" dir="rtl">
             <div className="max-w-7xl mx-auto space-y-8">
-                <header className="flex justify-between items-center border-b pb-6">
-                    <h1 className="text-3xl font-bold text-primary">لوحة التحكم</h1>
-                    <div className="text-sm text-muted-foreground">
-                        bookings: {bookings?.length || 0}
+                <header className="flex justify-between items-center border-b border-border/50 pb-6">
+                    <h1 className="heading-display text-3xl">لوحة التحكم</h1>
+                    <div className="text-sm text-muted-foreground px-4 py-2 rounded-full bg-muted/20 border border-border/40">
+                        الحجوزات: {bookings?.length || 0}
                     </div>
                 </header>
 

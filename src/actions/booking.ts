@@ -18,7 +18,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export async function submitBooking(data: BookingData) {
     try {
         // 1. Validate data (simple check)
-        if (!data.type || !data.date || !data.time || !data.name || !data.phone || !data.email) {
+        if (!data.type || !data.date || !data.name || !data.phone || !data.email) {
             return { success: false, error: "Missing required fields" };
         }
 
@@ -26,8 +26,7 @@ export async function submitBooking(data: BookingData) {
         const { error } = await supabase.from("bookings").insert([
             {
                 type: data.type,
-                date: data.date, // ensure date format is compatible or standard ISO
-                time: data.time,
+                date: data.date,
                 name: data.name,
                 phone: data.phone,
                 email: data.email,

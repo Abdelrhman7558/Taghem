@@ -3,19 +3,17 @@
 import { useState } from "react";
 import { format } from "date-fns";
 import { arEG } from "date-fns/locale";
-import { Download, Search, Filter } from "lucide-react";
-import * as XLSX from "xlsx"; // I'll need to install xlsx or just use simple csv generation
+import { Download, Search } from "lucide-react";
 
 // Simple CSV generator
 const downloadCSV = (data: any[]) => {
-    const headers = ["ID", "Type", "Date", "Time", "Name", "Phone", "Email", "Persons", "Notes", "Created At"];
+    const headers = ["ID", "Type", "Date", "Name", "Phone", "Email", "Persons", "Notes", "Created At"];
     const csvContent = [
         headers.join(","),
         ...data.map(row => [
             row.id,
             row.type,
             row.date,
-            row.time,
             `"${row.name}"`,
             `"${row.phone}"`,
             row.email,
@@ -50,11 +48,12 @@ export default function BookingsTable({ bookings }: { bookings: any[] }) {
 
     return (
         <div className="space-y-6">
-            <div className="flex flex-col md:flex-row gap-4 justify-between items-center bg-card p-4 rounded-xl border">
+            {/* Filters bar */}
+            <div className="flex flex-col md:flex-row gap-4 justify-between items-center glass-card p-4">
                 <div className="relative w-full md:w-96">
                     <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
                     <input
-                        className="w-full pr-10 pl-4 py-2 rounded-lg bg-background border outline-none focus:ring-2 focus:ring-primary/50"
+                        className="input-field pr-10 !py-2 !rounded-lg"
                         placeholder="بحث بالاسم، الهاتف، أو البريد..."
                         value={filter}
                         onChange={(e) => setFilter(e.target.value)}
@@ -63,7 +62,7 @@ export default function BookingsTable({ bookings }: { bookings: any[] }) {
 
                 <div className="flex gap-4 w-full md:w-auto">
                     <select
-                        className="px-4 py-2 rounded-lg bg-background border outline-none focus:ring-2 focus:ring-primary/50"
+                        className="px-4 py-2 rounded-lg bg-input border border-border/50 outline-none text-foreground focus:ring-2 focus:ring-primary/50 transition-all"
                         value={typeFilter}
                         onChange={(e) => setTypeFilter(e.target.value)}
                     >
@@ -74,7 +73,7 @@ export default function BookingsTable({ bookings }: { bookings: any[] }) {
 
                     <button
                         onClick={() => downloadCSV(filteredBookings)}
-                        className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors whitespace-nowrap"
+                        className="btn-primary !rounded-lg !py-2 !px-4 flex items-center gap-2 whitespace-nowrap text-sm"
                     >
                         <Download className="w-4 h-4" />
                         تصدير CSV
@@ -82,48 +81,49 @@ export default function BookingsTable({ bookings }: { bookings: any[] }) {
                 </div>
             </div>
 
-            <div className="overflow-x-auto rounded-xl border bg-card">
+            {/* Table */}
+            <div className="overflow-x-auto rounded-xl border border-border/50 glass-card">
                 <table className="w-full text-right">
-                    <thead className="bg-muted text-muted-foreground">
+                    <thead className="bg-muted/20 text-muted-foreground border-b border-border/40">
                         <tr>
                             <th className="p-4 font-medium">#</th>
                             <th className="p-4 font-medium">العميل</th>
                             <th className="p-4 font-medium">النوع</th>
                             <th className="p-4 font-medium">التاريخ</th>
-                            <th className="p-4 font-medium">الوقت</th>
                             <th className="p-4 font-medium">الأشخاص</th>
                             <th className="p-4 font-medium">الحالة</th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-border">
+                    <tbody className="divide-y divide-border/30">
                         {filteredBookings.length === 0 ? (
                             <tr>
-                                <td colSpan={7} className="p-8 text-center text-muted-foreground">
+                                <td colSpan={6} className="p-8 text-center text-muted-foreground">
                                     لا توجد حجوزات مطابقة
                                 </td>
                             </tr>
                         ) : (
                             filteredBookings.map((booking) => (
-                                <tr key={booking.id} className="hover:bg-accent/5 transition-colors">
-                                    <td className="p-4">{booking.id}</td>
+                                <tr key={booking.id} className="hover:bg-muted/10 transition-colors">
+                                    <td className="p-4 text-muted-foreground">{booking.id}</td>
                                     <td className="p-4">
-                                        <div className="font-semibold">{booking.name}</div>
+                                        <div className="font-semibold text-foreground">{booking.name}</div>
                                         <div className="text-sm text-muted-foreground" dir="ltr">{booking.phone}</div>
                                         <div className="text-xs text-muted-foreground truncate max-w-[150px]" dir="ltr">{booking.email}</div>
                                     </td>
                                     <td className="p-4">
-                                        <span className={`px-2 py-1 rounded-full text-xs font-bold ${booking.type === 'iftar' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'
+                                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${booking.type === 'iftar'
+                                            ? 'bg-primary/15 text-primary border border-primary/30'
+                                            : 'bg-secondary/15 text-secondary border border-secondary/30'
                                             }`}>
                                             {booking.type === 'iftar' ? 'فطار' : 'سحور'}
                                         </span>
                                     </td>
-                                    <td className="p-4 whitespace-nowrap">
+                                    <td className="p-4 whitespace-nowrap text-foreground">
                                         {format(new Date(booking.date), "dd MMM yyyy", { locale: arEG })}
                                     </td>
-                                    <td className="p-4">{booking.time}</td>
-                                    <td className="p-4">{booking.persons}</td>
+                                    <td className="p-4 text-foreground">{booking.persons}</td>
                                     <td className="p-4">
-                                        <span className="px-2 py-1 rounded-full text-xs bg-green-100 text-green-700">
+                                        <span className="px-3 py-1 rounded-full text-xs font-bold bg-green-900/30 text-green-400 border border-green-500/30">
                                             مؤكد
                                         </span>
                                     </td>

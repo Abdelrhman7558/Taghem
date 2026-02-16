@@ -1,60 +1,303 @@
+@import url("https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;500;600;700;800;900&display=swap");
 @import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════
+   RAMADAN ARCH THEME — Extracted from image
+   Deep twilight sky, glowing brass lantern,
+   golden dallah, wooden oud, mystical smoke
+   ═══════════════════════════════════════════════════ */
+
+@theme {
+  --font-amiri: "Amiri", serif;
+  --font-cairo: "Cairo", sans-serif;
+
+  /* Custom shadows */
+  --shadow-glow-sm: 0 0 10px rgba(212, 149, 43, 0.2);
+  --shadow-glow-md: 0 0 25px rgba(212, 149, 43, 0.3);
+  --shadow-glow-lg: 0 0 50px rgba(212, 149, 43, 0.4);
+
+  /* Custom animations */
+  --animate-shimmer: shimmer 3s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 4s ease-in-out infinite;
+  --animate-smoke-drift: smoke-drift 20s linear infinite;
+}
 
 @layer base {
   :root {
-    /* Extracted from the "Ramadan lantern/portal" image */
+    /* ── Background: Midnight Navy (deep twilight sky) ── */
+    --background: 210 55% 10%;
+    /* #0B1A2A */
+    --foreground: 40 76% 93%;
+    /* #FAF0E0 - Ivory Cream */
 
-    /* Background: Deep Twilight Blue/Teal from the sky/shadows */
-    --background: 205 35% 12%;
-    /* #132029 - Deep Dark Blue-Green */
-    --foreground: 40 30% 96%;
-    /* #FDF8F0 - Creamy Off-White */
+    /* ── Cards: Twilight Blue (mid-sky behind arch) ── */
+    --card: 215 58% 16%;
+    /* #112240 */
+    --card-foreground: 40 76% 93%;
 
-    /* Card: Slightly lighter/transparent version of background for glass effect */
-    --card: 205 35% 12%;
-    --card-foreground: 40 30% 96%;
+    /* ── Popover ── */
+    --popover: 215 58% 14%;
+    --popover-foreground: 40 76% 93%;
 
-    /* Popover */
-    --popover: 205 35% 10%;
-    --popover-foreground: 40 30% 96%;
+    /* ── Primary: Amber Gold (lantern glow) ── */
+    --primary: 38 68% 50%;
+    /* #D4952B */
+    --primary-foreground: 210 55% 10%;
 
-    /* Primary: Glowing Amber/Gold from the Lantern Light */
-    --primary: 38 92% 56%;
-    /* #F5A623 - Warm Glowing Gold */
-    --primary-foreground: 205 35% 12%;
+    /* ── Secondary: Burnished Brass (dallah/oud hardware) ── */
+    --secondary: 33 52% 46%;
+    /* #B07D3A */
+    --secondary-foreground: 40 76% 93%;
 
-    /* Secondary: Bronze/Wood tones from the Oud/Pot */
-    --secondary: 25 25% 20%;
-    /* #40291F - Deep Warm Brown */
-    --secondary-foreground: 40 30% 96%;
+    /* ── Accent: Warm Bronze (oud wood grain) ── */
+    --accent: 28 52% 36%;
+    /* #8B5E2B */
+    --accent-foreground: 40 76% 93%;
 
-    /* Muted: Shadows/Stone details */
-    --muted: 205 20% 25%;
-    --muted-foreground: 205 10% 70%;
+    /* ── Muted: Twilight undertones ── */
+    --muted: 215 30% 22%;
+    --muted-foreground: 210 15% 67%;
+    /* #9EAAB8 - Smoke White */
 
-    /* Accent: The Brightest Light Center */
-    --accent: 38 92% 56%;
-    --accent-foreground: 205 35% 12%;
+    /* ── Destructive ── */
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 40 76% 93%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 40 30% 96%;
-
-    /* Border: Subtle gold/bronze rim light */
-    --border: 38 30% 25%;
-    --input: 205 35% 16%;
-    --ring: 38 92% 56%;
+    /* ── Borders & inputs ── */
+    --border: 30 42% 17%;
+    /* #3D2E18 - Arch gold border */
+    --input: 215 58% 18%;
+    --ring: 38 68% 50%;
 
     --radius: 1rem;
+
+    /* ── Extended palette tokens ── */
+    --gold-glow: rgba(212, 149, 43, 0.35);
+    --lantern-warm: rgba(245, 180, 60, 0.12);
+    --smoke-color: rgba(158, 170, 184, 0.08);
+    --arch-shadow: rgba(11, 26, 42, 0.8);
   }
 }
 
+/* ── Global reset & base styles ── */
 @layer base {
   * {
     border-color: hsl(var(--border));
   }
 
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    font-family: var(--font-cairo);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.5);
+  }
+
+  /* Selection */
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+}
+
+/* ── Keyframe animations ── */
+@keyframes shimmer {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(212, 149, 43, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 35px rgba(212, 149, 43, 0.5);
+  }
+}
+
+@keyframes smoke-drift {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+
+  25% {
+    transform: translateX(15px) translateY(-10px);
+  }
+
+  50% {
+    transform: translateX(-10px) translateY(-20px);
+  }
+
+  75% {
+    transform: translateX(20px) translateY(-10px);
+  }
+
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Glassmorphic utility ── */
+@layer components {
+  .glass-card {
+    background: hsl(var(--card) / 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsl(var(--border) / 0.6);
+    border-radius: 1.5rem;
+  }
+
+  .glass-card-elevated {
+    background: hsl(var(--card) / 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--primary) / 0.15);
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px var(--lantern-warm);
+  }
+
+  /* Golden glow button */
+  .btn-primary {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    font-weight: 700;
+    border-radius: 9999px;
+    padding: 0.75rem 2rem;
+    box-shadow: 0 0 20px var(--gold-glow);
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 0 40px var(--gold-glow);
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    filter: none;
+  }
+
+  /* Ghost / secondary button */
+  .btn-ghost {
+    border: 1px solid hsl(var(--border));
+    color: hsl(var(--muted-foreground));
+    border-radius: 9999px;
+    padding: 0.75rem 2rem;
+    transition: all 0.3s ease;
+    background: transparent;
+  }
+
+  .btn-ghost:hover {
+    background: hsl(var(--card) / 0.4);
+    color: hsl(var(--foreground));
+    border-color: hsl(var(--primary) / 0.3);
+  }
+
+  /* Input field */
+  .input-field {
+    width: 100%;
+    padding: 1rem 3rem 1rem 1rem;
+    border-radius: 0.75rem;
+    background: hsl(var(--input));
+    border: 1px solid hsl(var(--border) / 0.5);
+    outline: none;
+    color: hsl(var(--foreground));
+    transition: all 0.3s ease;
+    font-family: var(--font-cairo);
+  }
+
+  .input-field::placeholder {
+    color: hsl(var(--muted-foreground) / 0.4);
+  }
+
+  .input-field:focus {
+    border-color: hsl(var(--primary) / 0.6);
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1), 0 0 15px var(--lantern-warm);
+  }
+
+  .input-field:hover:not(:focus) {
+    border-color: hsl(var(--border));
+  }
+
+  .input-field.error {
+    border-color: hsl(var(--destructive) / 0.6);
+  }
+
+  .input-field.error:focus {
+    box-shadow: 0 0 0 3px hsl(var(--destructive) / 0.1);
+  }
+
+  /* Heading with Amiri font */
+  .heading-display {
+    font-family: var(--font-amiri);
+    font-weight: 700;
+    color: hsl(var(--primary));
+  }
+}
+
+/* ── DayPicker theme overrides ── */
+.rdp {
+  --rdp-accent-color: hsl(var(--primary)) !important;
+  --rdp-background-color: hsl(var(--primary) / 0.15) !important;
 }

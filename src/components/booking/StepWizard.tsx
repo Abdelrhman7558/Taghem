@@ -46,14 +46,23 @@ export default function StepWizard() {
     return (
         <div className="min-h-screen py-12 px-4 md:px-8">
             <div className="max-w-4xl mx-auto">
-                {/* Progress Indicator */}
-                <div className="mb-12 flex justify-center gap-2" dir="ltr">
+                {/* Progress Indicator — glowing golden dots */}
+                <div className="mb-12 flex justify-center gap-3" dir="ltr">
                     {[1, 2, 3, 4].map((s) => (
-                        <div
-                            key={s}
-                            className={`h-2 rounded-full transition-all duration-500 ${s <= step ? "w-12 bg-primary" : "w-4 bg-border"
-                                }`}
-                        />
+                        <div key={s} className="flex items-center gap-3">
+                            <div
+                                className={`rounded-full transition-all duration-500 ${s <= step
+                                        ? "w-3 h-3 bg-primary shadow-glow-sm"
+                                        : "w-2 h-2 bg-border"
+                                    }`}
+                            />
+                            {s < 4 && (
+                                <div
+                                    className={`h-px transition-all duration-500 ${s < step ? "w-8 bg-primary/50" : "w-8 bg-border/30"
+                                        }`}
+                                />
+                            )}
+                        </div>
                     ))}
                 </div>
 
@@ -64,10 +73,10 @@ export default function StepWizard() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="flex flex-col items-center justify-center py-20 text-white"
+                            className="flex flex-col items-center justify-center py-20 text-foreground"
                         >
-                            <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4" />
-                            <p className="text-xl font-bold">جاري تأكيد الحجز...</p>
+                            <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mb-6 shadow-glow-md" />
+                            <p className="text-xl font-bold font-amiri text-primary">جاري تأكيد الحجز...</p>
                         </motion.div>
                     ) : (
                         <motion.div

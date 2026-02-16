@@ -3,7 +3,6 @@ export type BookingType = "iftar" | "suhoor";
 export interface BookingData {
     type?: BookingType;
     date?: Date;
-    time?: string;
     name?: string;
     phone?: string;
     email?: string;
