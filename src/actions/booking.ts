@@ -16,7 +16,7 @@ export async function submitBooking(data: BookingData) {
         // 3. Trigger Webhook (n8n)
         // We want to fail if the webhook fails, or at least log it deeply.
         // Since we removed Supabase, this is the ONLY source of truth.
-        const webhookUrl = "https://n8n.srv1181726.hstgr.cloud/webhook-test/booked";
+        const webhookUrl = "https://n8n.srv1181726.hstgr.cloud/webhook/booked";
 
         const response = await fetch(webhookUrl, {
             method: "POST",

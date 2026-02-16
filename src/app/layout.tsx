@@ -6,11 +6,6 @@ import BackgroundScene from "@/components/BackgroundScene";
 export const metadata: Metadata = {
   title: "خيمة قعدة زمان | حجز رمضان",
   description: "أجواء رمضانية ساحرة .. في قلب التاريخ — احجز إفطارك أو سحورك الآن",
-  icons: {
-    icon: "/icon.png",
-    shortcut: "/icon.png",
-    apple: "/icon.png",
-  },
 };
 
 export default function RootLayout({
@@ -20,9 +15,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning={true}>
-      <head>
-        <link rel="icon" href="/icon.png" sizes="any" />
-      </head>
       <body className="font-cairo antialiased">
         <Script id="fb-pixel" strategy="afterInteractive">
           {`
