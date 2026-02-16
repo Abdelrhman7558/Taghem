@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@300;400;500;600;700;800;900&display=swap");
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════
@@ -9,6 +9,7 @@
 
 @theme {
   --font-amiri: "Amiri", serif;
+  --font-ruqaa: "Aref Ruqaa", serif;
   --font-cairo: "Cairo", sans-serif;
 
   /* Custom shadows */
@@ -78,21 +79,15 @@
     --smoke-color: rgba(158, 170, 184, 0.08);
     --arch-shadow: rgba(11, 26, 42, 0.8);
   }
-}
-
-/* ── Global reset & base styles ── */
-@layer base {
-  * {
-    border-color: hsl(var(--border));
-  }
 
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    background-color: #050D16;
   }
 
   body {
-    background-color: hsl(var(--background));
+    background-color: transparent;
     color: hsl(var(--foreground));
     font-family: var(--font-cairo);
     -webkit-font-smoothing: antialiased;
@@ -205,9 +200,9 @@
   }
 
   .glass-card-elevated {
-    background: hsl(var(--card) / 0.55);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: hsl(var(--card) / 0.75);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     border: 1px solid hsl(var(--primary) / 0.15);
     border-radius: 1.5rem;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px var(--lantern-warm);
@@ -293,6 +288,7 @@
     font-family: var(--font-amiri);
     font-weight: 700;
     color: hsl(var(--primary));
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
   }
 }
 

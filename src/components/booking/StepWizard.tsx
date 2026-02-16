@@ -11,7 +11,7 @@ import { submitBooking } from "@/actions/booking";
 
 export default function StepWizard() {
     const [step, setStep] = useState(1);
-    const [bookingData, setBookingData] = useState<BookingData>({});
+    const [bookingData, setBookingData] = useState<BookingData>({ persons: 1 });
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const updateData = (newData: Partial<BookingData>) => {
@@ -25,7 +25,8 @@ export default function StepWizard() {
         setIsSubmitting(true);
         try {
             const result = await submitBooking(bookingData);
-            if (result.success) {
+            if (result.success && result.orderId) {
+                updateData({ orderId: result.orderId });
                 nextStep(); // Go to confirmation
             } else {
                 alert("حدث خطأ أثناء الحجز: " + result.error);
@@ -40,7 +41,7 @@ export default function StepWizard() {
 
     const handleReset = () => {
         setStep(1);
-        setBookingData({});
+        setBookingData({ persons: 1 });
     };
 
     return (
@@ -52,8 +53,8 @@ export default function StepWizard() {
                         <div key={s} className="flex items-center gap-3">
                             <div
                                 className={`rounded-full transition-all duration-500 ${s <= step
-                                        ? "w-3 h-3 bg-primary shadow-glow-sm"
-                                        : "w-2 h-2 bg-border"
+                                    ? "w-3 h-3 bg-primary shadow-glow-sm"
+                                    : "w-2 h-2 bg-border"
                                     }`}
                             />
                             {s < 4 && (

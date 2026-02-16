@@ -6,8 +6,9 @@ export interface BookingData {
     name?: string;
     phone?: string;
     email?: string;
-    persons?: number;
+    persons: number;
     notes?: string;
+    orderId?: string;
 }
 
 export interface StepProps {

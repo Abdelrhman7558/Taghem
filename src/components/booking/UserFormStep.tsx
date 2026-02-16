@@ -14,7 +14,7 @@ const formSchema = z.object({
     name: z.string().min(2, "الاسم مطلوب (أكثر من حرفين)"),
     phone: z.string().regex(phoneRegex, "رقم الهاتف غير صحيح (يجب أن يبدأ بـ 01)"),
     email: z.string().email("البريد الإلكتروني غير صحيح"),
-    persons: z.coerce.number().min(1, "عدد الأشخاص يجب أن يكون 1 على الأقل").optional(),
+    persons: z.coerce.number().min(1, "عدد الأشخاص يجب أن يكون 1 على الأقل"),
     notes: z.string().optional(),
 });
 
@@ -115,7 +115,7 @@ export default function UserFormStep({ onNext, onBack, updateData, data }: StepP
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-muted-foreground mr-1">عدد الأشخاص (اختياري)</label>
+                        <label className="text-sm font-medium text-muted-foreground mr-1">عدد الأشخاص</label>
                         <div className="relative">
                             <Users className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground/50" />
                             <input

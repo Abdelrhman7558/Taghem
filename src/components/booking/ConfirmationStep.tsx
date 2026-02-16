@@ -25,6 +25,9 @@ export default function ConfirmationStep({ data, onReset }: ConfirmationStepProp
                 </div>
 
                 <h2 className="heading-display text-3xl mb-2">تم الحجز بنجاح!</h2>
+                <div className="bg-primary/10 border border-primary/20 rounded-lg py-2 px-4 mb-4 inline-block">
+                    <p className="text-sm text-primary font-bold">رقم الطلب: {data.orderId}</p>
+                </div>
                 <p className="text-muted-foreground mb-8 text-lg">شكراً لك، {data.name}. تم تسجيل حجزك بنجاح.</p>
 
                 {/* Golden divider */}
