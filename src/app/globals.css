@@ -2,37 +2,49 @@
 
 @layer base {
   :root {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Extracted from the "Ramadan lantern/portal" image */
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    /* Background: Deep Twilight Blue/Teal from the sky/shadows */
+    --background: 205 35% 12%;
+    /* #132029 - Deep Dark Blue-Green */
+    --foreground: 40 30% 96%;
+    /* #FDF8F0 - Creamy Off-White */
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    /* Card: Slightly lighter/transparent version of background for glass effect */
+    --card: 205 35% 12%;
+    --card-foreground: 40 30% 96%;
 
-    --primary: 43 96% 56%;
-    /* Warm Gold #FBBC05 or similar */
-    --primary-foreground: 222.2 47.4% 11.2%;
+    /* Popover */
+    --popover: 205 35% 10%;
+    --popover-foreground: 40 30% 96%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    /* Primary: Glowing Amber/Gold from the Lantern Light */
+    --primary: 38 92% 56%;
+    /* #F5A623 - Warm Glowing Gold */
+    --primary-foreground: 205 35% 12%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    /* Secondary: Bronze/Wood tones from the Oud/Pot */
+    --secondary: 25 25% 20%;
+    /* #40291F - Deep Warm Brown */
+    --secondary-foreground: 40 30% 96%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    /* Muted: Shadows/Stone details */
+    --muted: 205 20% 25%;
+    --muted-foreground: 205 10% 70%;
+
+    /* Accent: The Brightest Light Center */
+    --accent: 38 92% 56%;
+    --accent-foreground: 205 35% 12%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 40 30% 96%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 43 96% 56%;
-    /* Gold Ring */
+    /* Border: Subtle gold/bronze rim light */
+    --border: 38 30% 25%;
+    --input: 205 35% 16%;
+    --ring: 38 92% 56%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
   }
 }
 

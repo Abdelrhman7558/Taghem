@@ -25,27 +25,37 @@ export default function SelectionStep({ onNext, updateData, data }: StepProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <motion.button
-                    whileHover={{ scale: 1.02 }}
+                    whileHover={{ scale: 1.02, translateY: -5 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => handleSelect("iftar")}
                     className={cn(
-                        "relative p-8 rounded-2xl border-2 transition-all duration-300 flex flex-col items-center gap-4 bg-card/50 backdrop-blur-sm",
+                        "relative p-8 rounded-3xl border transition-all duration-500 flex flex-col items-center gap-6 overflow-hidden group",
                         data.type === "iftar"
-                            ? "border-primary bg-primary/10 shadow-[0_0_30px_rgba(251,188,5,0.2)]"
-                            : "border-border hover:border-primary/50"
+                            ? "border-primary/80 bg-gradient-to-b from-primary/10 to-transparent shadow-[0_0_40px_rgba(245,166,35,0.15)]"
+                            : "border-white/5 bg-white/5 hover:border-primary/40 hover:bg-white/10"
                     )}
                 >
-                    <div className="p-4 rounded-full bg-primary/20 text-primary">
+                    {/* Internal Glow */}
+                    {data.type === "iftar" && <div className="absolute inset-0 bg-primary/5 blur-md" />}
+
+                    <div className={cn(
+                        "p-6 rounded-full transition-colors duration-300",
+                        data.type === "iftar" ? "bg-primary/20 text-primary" : "bg-white/5 text-muted-foreground group-hover:text-primary group-hover:bg-primary/10"
+                    )}>
                         <Sun className="w-12 h-12" />
                     </div>
-                    <h3 className="text-2xl font-bold">فطار</h3>
-                    <p className="text-sm text-muted-foreground">
-                        وجبة إفطار شهية مع أطباق رمضانية مميزة
-                    </p>
+
+                    <div className="text-center space-y-2 relative z-10">
+                        <h3 className={cn("text-3xl font-bold", data.type === "iftar" ? "text-primary" : "text-foreground")}>فطار</h3>
+                        <p className="text-sm text-balance text-muted-foreground">
+                            وجبة إفطار شهية مع أطباق رمضانية مميزة
+                        </p>
+                    </div>
+
                     {data.type === "iftar" && (
                         <motion.div
                             layoutId="checkmark"
-                            className="absolute top-4 right-4 w-6 h-6 bg-primary rounded-full flex items-center justify-center text-black text-xs font-bold"
+                            className="absolute top-4 right-4 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-[#132029] text-sm font-bold shadow-lg"
                         >
                             ✓
                         </motion.div>
@@ -53,27 +63,37 @@ export default function SelectionStep({ onNext, updateData, data }: StepProps) {
                 </motion.button>
 
                 <motion.button
-                    whileHover={{ scale: 1.02 }}
+                    whileHover={{ scale: 1.02, translateY: -5 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => handleSelect("suhoor")}
                     className={cn(
-                        "relative p-8 rounded-2xl border-2 transition-all duration-300 flex flex-col items-center gap-4 bg-card/50 backdrop-blur-sm",
+                        "relative p-8 rounded-3xl border transition-all duration-500 flex flex-col items-center gap-6 overflow-hidden group",
                         data.type === "suhoor"
-                            ? "border-primary bg-primary/10 shadow-[0_0_30px_rgba(251,188,5,0.2)]"
-                            : "border-border hover:border-primary/50"
+                            ? "border-primary/80 bg-gradient-to-b from-primary/10 to-transparent shadow-[0_0_40px_rgba(245,166,35,0.15)]"
+                            : "border-white/5 bg-white/5 hover:border-primary/40 hover:bg-white/10"
                     )}
                 >
-                    <div className="p-4 rounded-full bg-secondary text-primary">
+                    {/* Internal Glow */}
+                    {data.type === "suhoor" && <div className="absolute inset-0 bg-primary/5 blur-md" />}
+
+                    <div className={cn(
+                        "p-6 rounded-full transition-colors duration-300",
+                        data.type === "suhoor" ? "bg-primary/20 text-primary" : "bg-white/5 text-muted-foreground group-hover:text-primary group-hover:bg-primary/10"
+                    )}>
                         <Moon className="w-12 h-12" />
                     </div>
-                    <h3 className="text-2xl font-bold">سحور</h3>
-                    <p className="text-sm text-muted-foreground">
-                        أجواء سحور هادئة مع مشروباتنا الخاصة
-                    </p>
+
+                    <div className="text-center space-y-2 relative z-10">
+                        <h3 className={cn("text-3xl font-bold", data.type === "suhoor" ? "text-primary" : "text-foreground")}>سحور</h3>
+                        <p className="text-sm text-balance text-muted-foreground">
+                            أجواء سحور هادئة مع مشروباتنا الخاصة
+                        </p>
+                    </div>
+
                     {data.type === "suhoor" && (
                         <motion.div
                             layoutId="checkmark"
-                            className="absolute top-4 right-4 w-6 h-6 bg-primary rounded-full flex items-center justify-center text-black text-xs font-bold"
+                            className="absolute top-4 right-4 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-[#132029] text-sm font-bold shadow-lg"
                         >
                             ✓
                         </motion.div>
@@ -85,7 +105,7 @@ export default function SelectionStep({ onNext, updateData, data }: StepProps) {
                 <button
                     onClick={onNext}
                     disabled={!data.type}
-                    className="px-12 py-4 bg-primary text-primary-foreground text-lg font-bold rounded-full disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+                    className="px-16 py-4 bg-primary text-primary-foreground text-xl font-bold rounded-full disabled:opacity-30 disabled:cursor-not-allowed hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(245,166,35,0.4)] hover:shadow-[0_0_40px_rgba(245,166,35,0.6)] hover:-translate-y-1"
                 >
                     متابعة
                 </button>
