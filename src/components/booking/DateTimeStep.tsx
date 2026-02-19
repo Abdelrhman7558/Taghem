@@ -52,7 +52,7 @@ export default function DateTimeStep({ onNext, onBack, updateData, data }: StepP
                             mode="single"
                             selected={date}
                             onSelect={handleDateSelect}
-                            disabled={[{ before: startOfDay(new Date()) }]}
+                            disabled={[{ before: new Date(2026, 1, 23) }]}
                             locale={arEG}
                             dir="rtl"
                             showOutsideDays
