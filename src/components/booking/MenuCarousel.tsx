@@ -9,6 +9,9 @@ const MENU_IMAGES = [
     { src: "/menu-1.png", alt: "قائمة طعام ١ - 800 جنيه" },
     { src: "/menu-2.png", alt: "قائمة طعام ٢ - 1000 جنيه" },
     { src: "/menu-3.png", alt: "قائمة طعام ٣ - 1250 جنيه" },
+    { src: "/menu-4.png", alt: "قائمة طعام ٤ - ١٥٠٠ جنية" },
+    { src: "/menu-trays.png", alt: "صواني" },
+    { src: "/menu-misc.png", alt: "أطباق متنوعة" },
     { src: "/menu-end.png", alt: "نتمنى ان تكون قائمتنا نالت رضاكم" },
 ];
 
