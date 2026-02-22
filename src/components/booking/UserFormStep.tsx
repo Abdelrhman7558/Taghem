@@ -40,7 +40,7 @@ export default function UserFormStep({ onNext, onBack, updateData, data }: StepP
 
     const onSubmit = (formData: FormData) => {
         updateData(formData);
-        onNext();
+        onNext(formData);
     };
 
     return (

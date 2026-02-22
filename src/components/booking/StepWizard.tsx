@@ -21,13 +21,14 @@ export default function StepWizard() {
     const nextStep = () => setStep((prev) => prev + 1);
     const prevStep = () => setStep((prev) => prev - 1);
 
-    const handleFinalSubmit = async () => {
+    const handleFinalSubmit = async (finalFormData?: Partial<BookingData>) => {
         setIsSubmitting(true);
+        const dataToSubmit = { ...bookingData, ...finalFormData };
         try {
-            const result = await submitBooking(bookingData);
+            const result = await submitBooking(dataToSubmit as BookingData);
             if (result.success && result.orderId) {
-                updateData({ orderId: result.orderId });
-                nextStep(); // Go to confirmation
+                updateData({ ...finalFormData, orderId: result.orderId });
+                setStep(4); // Go to confirmation
             } else {
                 alert("حدث خطأ أثناء الحجز: " + result.error);
             }

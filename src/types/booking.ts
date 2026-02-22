@@ -12,7 +12,7 @@ export interface BookingData {
 }
 
 export interface StepProps {
-    onNext: () => void;
+    onNext: (data?: any) => void;
     onBack: () => void;
     updateData: (data: Partial<BookingData>) => void;
     data: BookingData;
